@@ -1,0 +1,219 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en" charset="UTF-8">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Librarian | Update account</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome-6.4.2/css/all.css}"/>
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment.css}"/>
+    <link th:href="@{/css/styles/admin.css}" rel="stylesheet">
+
+
+    <!-- SweetAlert từ CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+
+    <style>
+        label.error {
+            margin-top: 5px;
+            margin-left: 5px;
+            display: block;
+            color: red;
+            /*font-size: smaller;*/
+        }
+    </style>
+
+</head>
+<body class="app_container">
+
+<header th:replace="~{fragments/header::headerAdminSection}"></header>
+<div class="main_content">
+    <div class="grid app__container-content-wrapper">
+        <div class="app__container-content">
+            <div class="course-details-head">
+                <a th:href="@{/admin}">Home</a>
+                <span> &gt; <a th:href="@{/admin/accounts/list}">Users management</a></span>
+                <span> &gt; Update user</span>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Update account</h1>
+
+            </div>
+            <div class="lib_content">
+                <div class="add-form">
+<!--                    <div th:if="${param.success}">-->
+<!--                        <div class="alert alert-info">Save account successful !!!</div>-->
+<!--                    </div>-->
+<!--                    <div th:if="${param.error}">-->
+<!--                        <div class="alert alert-danger">Please account information again !!!-->
+<!--                            Account not exist or AccountId existed.-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="add-form-content">
+                        <form method="post" role="form" th:action="@{/admin/accounts/update}"
+                              th:object="${account}" th:id="update-account">
+                            <table class="table-form lib_table ">
+                                <tr class="lib_input-wrapper d-none">
+                                    <td class="lib_input-label"><label th:for="id">Account ID</label></td>
+                                    <td><input type="text"
+                                               class="lib_input form-control" th:field="*{id}"
+                                               placeholder="Enter account ID" readonly>
+                                    </td>
+                                </tr>
+
+                                <tr class="lib_input-wrapper d-none">
+                                    <td class="lib_input-label"><label th:for="username">Username</label></td>
+                                    <td><input type="text"  th:id="username" class="lib_input form-control" th:field="*{username}"
+                                               placeholder="Enter username" required>
+
+                                    </td>
+                                </tr>
+                                <tr class="lib_input-wrapper d-none">
+                                    <td class="lib_input-label"><label th:for="password">Password</label></td>
+                                    <td><input type="text" th:id="password"
+                                               class="lib_input form-control" th:field="*{password}"
+                                               placeholder="Enter password" readonly>
+                                    </td>
+                                </tr>
+
+                                <tr class="lib_input-wrapper">
+                                    <td class="lib_input-label"><label th:for="email">Email</label></td>
+                                    <td><input type="text" th:id="email"
+                                               class="lib_input form-control" th:field="*{email}"
+                                               placeholder="Enter email" required>
+
+                                    </td>
+                                </tr>
+                                <tr class="lib_input-wrapper">
+                                    <td class="lib_input-label"><label th:for="name">Full Name</label></td>
+                                    <td><input type="text" th:id="name"
+                                               class="lib_input form-control" th:field="*{name}"
+                                               placeholder="Enter name" required>
+
+                                    </td>
+                                </tr>
+
+                                <tr class="lib_input-wrapper d-none">
+                                    <td class="lib_input-label"><label th:for="dateOfBirth">Date of birth</label></td>
+                                    <td><input type="date" th:id="dateOfBirth"
+                                               class="lib_input form-control" th:field="*{dateOfBirth}"
+
+                                               required>
+                                    </td>
+                                </tr>
+                                <tr class="lib_input-wrapper d-none">
+                                    <td class="lib_input-label"><label th:for="gender">Gender</label></td>
+                                    <td>
+                                        <th:block th:each="gender : ${genders}">
+                                            <input type="radio" th:field="*{gender}"
+                                                   th:id="${gender.getDisplayValue()}"
+                                                   th:value="${gender}">
+                                            <label class="me-3" th:for="${gender.getDisplayValue()}"
+                                                   th:text="${gender.getDisplayValue()}"></label>
+                                        </th:block>
+                                    </td>
+                                </tr>
+<!--                                <tr class="lib_input-wrapper">-->
+<!--&lt;!&ndash;                                    <td class="lib_input-label"><label th:for="status">Campus</label></td>&ndash;&gt;-->
+<!--                                </tr>-->
+<!--                                <tr class="lib_input-wrapper">-->
+<!--                                    <td class="lib_input-label"><label th:for="campus">Campus</label></td>-->
+<!--                                    <td><select class="lib_input" th:field="*{campus}" th:id="campus">-->
+<!--                                        <option-->
+<!--                                                th:each="campus : ${campuses}"-->
+<!--                                                th:text="${campus.getDisplayValue()}"-->
+<!--                                                th:value="${campus}">-->
+<!--                                        </option>-->
+<!--                                    </select>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                                <tr class="lib_input-wrapper">
+                                    <td class="lib_input-label"><label for="role">Role</label></td>
+                                    <td>
+                                        <select class="lib_input" th:field="*{role}" id="role">
+                                            <option th:each="role : ${roles}"
+                                                    th:text="${role}"
+                                                    th:value="${role}">
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+<!--                                <tr id="isAdminCheckbox" class="" th:if="(${account.role.getDisplayValue() == 'LIBRARIAN'})">-->
+<!--                                    <td></td>-->
+<!--                                    <td>-->
+<!--                                        <input type="checkbox" name="isAdmin" id="isAdmin"-->
+<!--                                        th:checked="${isAdmin}"-->
+<!--                                        >-->
+<!--                                        <label for="isAdmin">Is Admin</label>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <button type="submit" class="btn lib_btn-save">Update</button>
+<!--                                        <button type="button" class="btn lib_btn-delete" >Delete</button>-->
+                                        <button type="button" class="btn lib_btn-delete delete-account" th:id="${account.getId}">Delete</button>
+<!--                                        <a class="delete-account" th:id="${account.getId}">Delete</a>-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footerSection}"></div>
+
+
+<!--Bootstrap script-->
+<script th:src="@{/assets/bootstrap-dist/js/bootstrap.bundle.min.js}"
+
+        crossorigin="anonymous"></script>
+
+<!--Custom script-->
+<script th:src="@{/js/librarian/librarian.js}"></script>
+
+<!--Validate-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script th:src="@{/js/validation.js}"></script>
+<script th:src="@{/js/admin/admin.js}"></script>
+
+<script th:inline="javascript">
+    validate_updateAccount();
+
+    var successParam = [[${param.success}]];
+    if (successParam) {
+        Swal.fire(
+            'Success!',
+            'Update account successful!',
+            'success'
+        );
+    }
+
+    var errorParam = [[${param.error}]];
+    if (errorParam) {
+        Swal.fire(
+            'Error!',
+            'Please check account information again!',
+            'error'
+        );
+    }
+</script>
+</body>
+</html>

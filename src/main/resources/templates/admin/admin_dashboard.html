@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome-6.4.2/css/all.css}"/>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment.css}"/>
+    <link th:href="@{/css/styles/admin.css}" rel="stylesheet">
+</head>
+<body class="app_container">
+<header th:replace="~{fragments/header::headerAdminSection}"></header>
+<div class="main_content admin-main-content">
+    <div class="grid app__container-content-wrapper">
+        <div class="app__container-content">
+            <div class="lib-main_menu">
+                <h1 class="text-center"> Admin Homepage </h1>
+                <div class="lib-main_menu-item">
+                    <a th:href="@{/admin/accounts}">
+                        <i class="p-2 fa fa-user"></i>
+                        Accounts management</a>
+                </div>
+                <div class="lib-main_menu-item">
+                                        <a th:href="@{/admin/course_creator}">
+                    <i class="p-2 fa fa-book"></i>
+                    Course-creators management</a>
+                </div>
+                <div class="lib-main_menu-item">
+                    <a th:href="@{/admin/trainingtypes}">
+                        <i class="p-2 fa fa-window-maximize"></i>
+                        Training types management</a>
+                </div>
+                <div class="lib-main_menu-item">
+                    <a th:href="@{/admin/feedbacks}">
+                        <i class="p-2 fa fa-comments"></i>
+                        Feedbacks management</a>
+                </div>
+                <div class="lib-main_menu-item">
+                    <a th:href="@{/admin/user_log/tracking}">
+                        <i class="p-2 fa fa-history" aria-hidden="true"></i>
+                        User activity tracking and logs</a>
+                </div>
+                <div class="lib-main_menu-item">
+                    <a th:href="@{/admin/login_as_another_account}">
+                        <i class="p-2 fas fa-chalkboard-teacher"></i>
+                        Login as an another account</a>
+                </div>
+                <div class="lib-main_menu-item">
+                    <a th:href="@{/admin/user_log/tracking}">
+                        <i class="p-2 fa fa-hdd" aria-hidden="true"></i>
+                        Backup and restore</a>
+                </div>
+<!--                <div class="lib-main_menu-item">-->
+<!--                    <a th:href="@{/librarian/settings}">-->
+<!--                        <i class="p-2 fa fa-cog" aria-hidden="true"></i>-->
+<!--                        Settings</a>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footerSection}"></div>
+
+<!--Bootstrap script-->
+<script th:src="@{/assets/bootstrap-dist/js/bootstrap.bundle.min.js}"
+        crossorigin="anonymous"></script>
+</body>
+</html>

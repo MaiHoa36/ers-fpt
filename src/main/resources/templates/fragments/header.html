@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<!--LIBRARIAN HEADER-->
+<body th:fragment="headerLibrarianSection">
+<header class="header header-librarian">
+    <div class="">
+        <!-- Header navbar -->
+        <nav class="header__navbar grid">
+            <a class="header__logo-link grid__column-2">
+                <div class="header__logo">
+                    <img alt="" th:src="@{/images/fptUniversityLogo.png}">
+                </div>
+            </a>
+            <ul class="header__navbar-list grid__column-9">
+                <li class="header__navbar-item header__notify-appearance">
+                    <p class="notification-number" id="notification-number">1</p>
+                    <a class="header__navbar-item-link">
+                        <i class="header__navbar-icon fas fa-bell"></i>
+                    </a>
+                    <!--Notifications Header-->
+                    <div class="header__notify header__bridge">
+                        <header class="header__notify-header">
+                            <h3>Received Notifications</h3>
+                        </header>
+                        <ul class="header__notify-list">
+                            <li class="header__notify-item header__notify-item--seen">
+                                <a href="" class="header__notify-link">
+                                    <img src="" alt="" class="header__notify-img">
+                                    <div class="header__notify-info">
+                                        <span class="header__notify-name">User huypqhe151329 has been sent a request</span>
+                                        <span class="header__notify-description">
+                                            Type: document request, Course: HCM202
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <footer class="header__notify-footer">
+                            <a href="" class="header__notify-footer-btn">See all</a>
+                        </footer>
+                    </div>
+                </li>
+                <li class="header__navbar-item header__navbar-user header__navbar-user-appearance">
+                    <div class="header__navbar-user-wrap">
+                        <img th:src="@{/images/role_avatar/librarian.png}" alt="" class="header__navbar-user-img">
+                        <th:block th:if="${loggedInUser ne null}">
+                            <span class="header__navbar-user-name" th:text="${loggedInUser.name}"> </span> <span
+                                class="header__navbar-user-role">(Librarian)</span>
+                        </th:block>
+                    </div>
+                </li>
+                <li class="header__navbar-item">
+                    <a th:href="@{/logout}" onclick="" class="header__navbar-item-link" style="font-weight: bold">
+                        <i class="header__navbar-icon fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                        <span class="header__label">Logout</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+</body>
+
+<!--ADMIN HEADER-->
+<!--Copy from Librarian header and change name-->
+<body th:fragment="headerAdminSection">
+<header class="header header-librarian">
+    <div class="">
+        <!-- Header navbar -->
+        <nav class="header__navbar grid">
+            <a href="/" class="header__logo-link  grid__column-2">
+                <div class="header__logo">
+                    <img alt="" th:src="@{/images/fptUniversityLogo.png}">
+                </div>
+            </a>
+            <ul class="header__navbar-list  grid__column-9">
+                <li class="header__navbar-item header__notify-appearance">
+                    <p class="notification-number"  id="notification-number-admin">1</p>
+                    <a class="header__navbar-item-link">
+                        <i class="header__navbar-icon fas fa-bell"></i>
+                    </a>
+                    <!--Notifications Header-->
+                    <div class="header__notify header__bridge">
+                        <header class="header__notify-header">
+                            <h3>Received Notifications</h3>
+                        </header>
+                        <ul class="header__notify-list">
+                            <li class="header__notify-item header__notify-item--seen">
+                                <a href="" class="header__notify-link">
+                                    <img src="" alt="" class="header__notify-img">
+                                    <div class="header__notify-info">
+                                        <span class="header__notify-name">User huypqhe151329 has been sent a request</span>
+                                        <span class="header__notify-description">
+                                            Type: document request, Course: HCM202
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <footer class="header__notify-footer">
+                            <a href="" class="header__notify-footer-btn">See all</a>
+                        </footer>
+                    </div>
+                </li>
+                <li class="header__navbar-item header__navbar-user header__navbar-user-appearance">
+                    <div class="header__navbar-user-wrap">
+                        <img th:src="@{/images/role_avatar/admin.png}" alt="" class="header__navbar-user-img">
+                        <th:block th:if="${loggedInUser ne null}">
+                            <span class="header__navbar-user-name" th:text="${loggedInUser.name}"> </span> <span
+                                class="header__navbar-user-role">(Admin)</span>
+                        </th:block>
+                    </div>
+                </li>
+                <li class="header__navbar-item">
+                    <a th:href="@{/logout}" onclick="" class="header__navbar-item-link" style="font-weight: bold">
+                        <i class="header__navbar-icon fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                        <span class="header__label">Logout</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+</body>
+
+<!--LECTURER HEADER-->
+<body th:fragment="headerLecturerSection">
+<!--     Header -->
+<header class="header">
+    <div class="lec__header-content">
+        <!-- Header navbar -->
+        <nav class="header__navbar row">
+            <div class="sidebar-system col-md-4">
+                <div class="sidebar__arrow d-flex align-items-center">
+                    <i id="toggleIdLecturer" class="fa-solid fa-bars sidebar-icon"></i>
+                    <a class="header__logo-link">
+                        <div class="header__logo">
+                            <img alt="" th:src="@{/images/fptUniversityLogo.png}">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="header__link-list col-md-8">
+                <ul class="header__navbar-list">
+                    <li class="header__navbar-item header__notify-appearance"
+                        th:notification-email="${loggedInUser.email}"
+                        onclick="getNotifications(this.getAttribute('notification-email'))">
+                        <th:block th:unless="${notificationNumber == null || notificationNumber eq '0'}">
+                        <p class="notification-number" id="notification-number-lecturer" th:text="${notificationNumber}"></p>
+                        </th:block>
+                        <a class="header__navbar-item-link">
+                            <i class="header__navbar-icon fas fa-bell"></i>
+                            <!--                            Notifications-->
+                        </a>
+                        <!--Notifications Header-->
+                        <div class="header__notify header__bridge" id="notificationBox" style="z-index: 111">
+                            <header class="header__notify-header">
+                                <h3>Received Notifications</h3>
+                            </header>
+                            <div th:unless="${notificationNumber == null || notificationNumber eq '0'}">
+                                <ul class="header__notify-list">
+
+                                </ul>
+                                <footer class="header__notify-footer">
+                                    <a href="" class="header__notify-footer-btn">See all</a>
+                                </footer>
+                            </div>
+                            <div th:if="${notificationNumber == null || notificationNumber eq '0'}">
+                                <div class="d-flex justify-content-center">
+                                    No notifications
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="header__navbar-item header__navbar-item-icon">
+                        <a href="" class="header__navbar-item-link">
+                            <i class="header__navbar-icon far fa-question-circle"></i>
+                            <!--                            Help-->
+                        </a>
+                    </li>
+                    <li class="header__navbar-item header__navbar-user header__navbar-user-appearance">
+                        <div class="header__navbar-user-wrap">
+                            <img th:src="@{/images/role_avatar/lecturer_female.jpg}" alt="" class="header__navbar-user-img">
+                            <th:block th:if="${loggedInUser ne null}">
+                                <span class="header__navbar-user-name" th:text="${loggedInUser.name}"></span> <span
+                                    class="header__navbar-user-role">(Lecturer)</span>
+                            </th:block>
+                        </div>
+                        <div class="header__navbar-user-option-list header__bridge">
+                            <div class="header__navbar-user-profile">
+                                <div class="header__navbar-user-profile-img-wrapper">
+                                    <img th:src="@{/images/role_avatar/lecturer_female.jpg}" alt=""
+                                         class="header__navbar-user-profile-img">
+                                </div>
+                                <div style="min-width: max-content">
+                                    <p th:text="${loggedInUser.name}"></p>
+                                    <p th:text="${loggedInUser.dateOfBirth}"></p>
+                                </div>
+                            </div>
+                            <div class="student__log-out" th:unless="${loggedInUser.role.toString() eq 'LECTURER'}">
+                                <a th:href="@{/}">
+                                    Back to dashboard
+                                </a>
+                            </div>
+                            <div class="student__log-out">
+                                <a th:href="@{/logout}">
+                                    Log out
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="header__navbar-item">
+                        <a th:href="@{/logout}" onclick="" class="header__navbar-item-link" style="font-weight: bold">
+                            <i class="header__navbar-icon fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                            <span class="header__label">Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--jquery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!--Notification-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script th:src="@{/js/lecturer/notification-lecturer.js}"></script>
+</body>
+
+<!--STUDENT HEADER-->
+
+<body th:fragment="studentHeaderSection">
+<!--     Header -->
+<header class="header">
+    <div class="stu__header-content">
+        <!-- Header navbar -->
+        <nav class="header__navbar row">
+            <div class="sidebar-system col-md-4">
+                <div class="sidebar__arrow d-flex align-items-center">
+                    <i id="toggle" class="fa-solid fa-bars sidebar-icon"></i>
+                    <a class="header__logo-link">
+                        <div class="header__logo">
+                            <img alt="" th:src="@{/images/fptUniversityLogo.png}">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="header__link-list col-8">
+                <ul class="header__navbar-list">
+                    <li class="header__navbar-item header__notify-appearance">
+                        <p class="notification-number" id="notification-number-student">1</p>
+                        <a class="header__navbar-item-link">
+                            <i class="header__navbar-icon fas fa-bell"></i>
+                            <!--                            Notifications-->
+                        </a>
+                        <!--Notifications Header-->
+                        <div class="header__notify header__bridge">
+                            <header class="header__notify-header">
+                                <h3>Received Notifications</h3>
+                            </header>
+                            <ul class="header__notify-list">
+                                <li class="header__notify-item header__notify-item--seen">
+                                    <a href="" class="header__notify-link">
+                                        <img src="" alt="" class="header__notify-img">
+                                        <div class="header__notify-info">
+                                            <span class="header__notify-name">User huypqhe151329 has been sent a request</span>
+                                            <span class="header__notify-description">
+                                                <span></span>
+                                        </span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <footer class="header__notify-footer">
+                                <a href="" class="header__notify-footer-btn">See all</a>
+                            </footer>
+                        </div>
+                    </li>
+
+                    <li class="header__navbar-item header__navbar-item-icon">
+                        <a href="" class="header__navbar-item-link">
+                            <i class="header__navbar-icon far fa-question-circle"></i>
+                            <!--                                                        Help-->
+                        </a>
+                    </li>
+
+                    <th:block th:if="${loggedInUser ne null}">
+                        <li class="header__navbar-item header__navbar-user header__navbar-user-appearance">
+                            <div class="header__navbar-user-wrap">
+                                <img th:src="@{/images/role_avatar/student.png}" alt="" class="header__navbar-user-img">
+
+                                <span class="header__navbar-user-name" th:text="${loggedInUser.name}"></span> <span
+                                    class="header__navbar-user-role">(Student)</span>
+
+                            </div>
+                            <div class="header__navbar-user-option-list header__bridge">
+                                <div class="header__navbar-user-profile">
+                                    <div class="header__navbar-user-profile-img-wrapper">
+                                        <img th:src="@{/images/role_avatar/student.png}" alt=""
+                                             class="header__navbar-user-profile-img">
+                                    </div>
+                                    <div style="min-width: max-content">
+                                        <p th:text="${loggedInUser.name}"></p>
+                                        <p th:text="${loggedInUser.dateOfBirth}"></p>
+                                    </div>
+                                </div>
+                                <div class="student__log-out" th:unless="${loggedInUser.role.toString() eq 'STUDENT'}">
+                                    <a th:href="@{/}">
+                                        Back to dashboard
+                                    </a>
+                                </div>
+                                <div class="student__log-out">
+                                    <a th:href="@{/logout}">
+                                        Log out
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </th:block>
+
+                    <li class="header__navbar-item">
+                        <a th:href="@{/logout}" onclick="" class="header__navbar-item-link" style="font-weight: bold">
+                            <i class="header__navbar-icon fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                            <span class="header__label">Logout</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+</body>
+
+<!--GUEST HEADER-->
+
+<body th:fragment="guestHeaderSection">
+<!--     Header -->
+<header class="header header-guest">
+    <div class="grid">
+        <!-- Header navbar -->
+        <nav class="header__navbar">
+            <a href="/" class="header__logo-link col-md-2">
+                <div class="header__logo">
+                    <img alt="" th:src="@{/images/fptUniversityLogo.png}">
+                </div>
+            </a>
+            <ul class="header__navbar-list">
+                <li class="header__navbar-item">
+                    <a th:href="@{contact_us}" class="header__navbar-item-link">
+                        <i class="header__navbar-icon fas fa-phone"></i>
+                        <span class="header__label">Contact us</span>
+                    </a>
+                </li>
+                <li class="header__navbar-item header__navbar-item-icon">
+                    <a th:href="@{/faq}" class="header__navbar-item-link">
+                        <i class="header__navbar-icon far fa-question-circle"></i>
+                        <span class="header__label">Help & FAQs</span></a>
+                </li>
+                <li id="openLoginModal" class="header__navbar-item">
+                    <a th:href="@{/login}" class="header__navbar-item-link" style="font-weight: bold">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span class="header__label">Login</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,25 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 752040696938-m73c0dav2e7sup2cc7lrutehu9bug6un.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAYLUUFKHYRZ3U3LNL
+      secret-key: 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
+    region:
+      static: ap-southeast-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: fpt-e-resources

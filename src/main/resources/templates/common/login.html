@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--Login modal-->
+<body th:fragment="loginForm">
+<div id="loginModal" class="modal">
+    <div id="modalOverlay" class="modal__overlay">
+
+    </div>
+    <div class="modal__body">
+        <form id="loginForm" class="auth-form mt-5" method="post" role="form" th:action="@{/login}"
+              th:id="login-form">
+            <div class="auth-form__container">
+                <div class="auth-form__header">
+                    <div class="auth-form__heading">
+                        Login
+                    </div>
+                </div>
+
+                <div class="auth-form__form">
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid account
+                    </div>
+
+                    <div class="auth-form__group ">
+                        <input type="email" name="username" class="auth-form__input" placeholder="Your Email">
+                    </div>
+                    <div class="auth-form__group ">
+                        <input type="password" name="password" class="auth-form__input" placeholder="Enter Password">
+                    </div>
+                    <div class="auth-form__socials">
+                        <a th:href="@{/oauth2/authorization/google}"
+                           class="btn btn-login btn-primary auth-form__socials--google">
+                            <i class="auth-form__socials-google-icon fab fa-google"></i>
+                            <span class="auth-form__socials-title">
+                        Login with Google
+                        </span>
+                        </a>
+                        <a href="" class="btn btn-login btn--with-icon auth-form__socials--feid">
+                            <i class="auth-form__socials-feid-icon fa-solid fa-envelope"></i>
+                            <span class="auth-form__socials-title">
+                        Login with FEID
+                        </span>
+                        </a>
+
+                    </div>
+                    <!--                    <div class="auth-form__select">-->
+                    <!--                        <label th:for="campus">Select campus</label>-->
+                    <!--                        <select class="auth-form__select-tag" th:name="campus" th:id="campuses">-->
+                    <!--                            <option th:each="campus : ${campuses}"-->
+                    <!--                                    th:text="${campus}"-->
+                    <!--                                    th:value="${campus}">-->
+                    <!--                            </option>-->
+                    <!--                        </select>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="auth-form__aside">-->
+                    <!--                        <div class="auth-form__help">-->
+                    <!--                            <a href="" class="auth-form__help-link auth-form__help-forgot-password">Forgot-->
+                    <!--                                Password</a>-->
+                    <!--                            <span class="auth-form__help-separate-line">|</span>-->
+                    <!--                            <a href="" class="auth-form__help-link auth-form__help-need-help">Need Help?</a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                                        <div class="auth-form__controls mb-5">
+                                            <a href="/" id="closeLoginForm" class="btn btn--hover ">Back</a>
+                                                                    <button type="submit" class="btn btn--primary auth-form__controls-login ">Login</button>
+                                        </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+</body>

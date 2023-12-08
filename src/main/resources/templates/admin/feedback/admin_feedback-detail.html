@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedback Detail</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome-6.4.2/css/all.css}"/>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment.css}"/>
+    <link th:href="@{/css/styles/librarian.css}" rel="stylesheet">
+
+    <!-- SweetAlert từ CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+
+
+</head>
+<body class="app_container">
+
+<!-- Include header -->
+<header th:replace="~{fragments/header::headerAdminSection}"></header>
+
+<div class="main_content">
+    <div class="grid app__container-content-wrapper">
+        <div class="app__container-content">
+            <div class="feedback-details-head">
+                <a th:href="@{/admin}">Home</a>
+                <span> &gt; <a th:href="@{/admin/feedbacks}">Feedbacks management</a></span>
+                <span> &gt; Feedback Detail</span>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Feedback Detail</h1>
+            </div>
+            <div class="feedback-content">
+                <!--                <h2 class="mt-3">Details of feedback:</h2>-->
+
+                <table class="table-responsive border-1" th:if="feedback ne null">
+                    <tr class="lib_input-wrapper ">
+                        <td class="lib_input-label">
+                        </td>
+                        <td>
+                            <input hidden="hidden" type="text" th:id="id" class="lib_input form-control"
+                                   th:field="${feedback.id}"
+                                   readonly>
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td class="lib_input-label">
+                            <label th:for="Email">Email:</label>
+                        </td>
+                        <td class="lib_input form-control border-1"
+                            th:text="${feedback.account.email}">
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td class="lib_input-label">
+                            <label th:for="status">Status:</label>
+                        </td>
+                        <td class="lib_input form-control"
+                            th:text="${feedback.status}">
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td class="lib_input-label">
+                            <label th:for="Emotion">Satisfaction level:</label>
+                        </td>
+                        <td class="lib_input form-control" th:text="${feedback.feedbackEmotion}">
+                        </td>
+                    </tr>
+
+                    <tr class="">
+                        <td class="lib_input-label">
+                            <label th:for="feedbackContent">Feedback content:</label>
+                        </td>
+                        <td class="lib_textarea form-control paragraph"
+                            th:text="${feedback.feedbackContent}">
+                        </td>
+                    </tr>
+
+                    <tr class="">
+                        <td class="lib_input-label">
+                            <label th:for="createdDate">Created date:</label>
+                        </td>
+                        <td type="text" class="lib_input form-control"
+                                   th:text="${feedback.createdDate}">
+                        </td>
+                    </tr>
+                    <tr class="lib_input-wrapper">
+                        <td></td>
+                        <td>
+                            <a th:href="|mailto:${feedback.account.email}|"
+                               th:attr="onclick=|updateFeedbackStatusToDone('${feedback.id}')|"
+                               class="btn lib_btn-save">Send Email</a>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Bootstrap script-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+<!--Custom script-->
+<script th:src="@{/js/admin/admin.js}"></script>
+
+<!--Validate-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+
+<script th:src="@{/js/validation.js}"></script>
+
+<script th:inline="javascript">
+
+
+    function updateFeedbackStatusToDone(feedbackId) {
+        // Implement an AJAX request to the server endpoint responsible for updating the status
+        $.ajax({
+            url: '/api/admin/feedback/respond', // Set the correct server endpoint URL
+            type: 'GET',
+            data: {
+                id: feedbackId,
+                status: 'Done'
+            },
+            success: function(response) {
+                // Handle successful response
+                if (response.success) {
+                    Swal.fire(
+                        'Updated!',
+                        'The feedback status has been updated to Done.',
+                        'success'
+                    );
+                }
+            },
+            error: function() {
+                // Handle error
+                Swal.fire(
+                    'Error!',
+                    'There was a problem updating the feedback status.',
+                    'error'
+                );
+            }
+        });
+    }
+
+
+    var successParam = [[${param.success}]];
+    if (successParam) {
+        Swal.fire(
+            'Success!',
+            successParam,
+            'success'
+        );
+    }
+
+    var errorParam = [[${param.error}]];
+    if (errorParam) {
+        Swal.fire(
+            'Error!',
+            errorParam,
+            'error'
+        );
+    }
+
+
+</script>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footerSection}"></div>
+</body>
+</html>

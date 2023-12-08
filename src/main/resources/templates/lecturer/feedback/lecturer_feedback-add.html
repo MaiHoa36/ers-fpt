@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lecturer | Courses </title>
+    <!-- Style -->
+    <link rel="stylesheet" th:href="@{/css/feedback.css}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome-6.4.2/css/all.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles/lecturer.css}"/>
+
+    <style>
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            font-size: 16px;
+            resize: none;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+<body class="app_container">
+<!-- Header -->
+<div th:replace="~{fragments/header::headerLecturerSection}"></div>
+<div class="main_content">
+    <div class="container-content-wrapper">
+        <!--  Main-->
+        <div class="container-content">
+            <div class="main-content lec__course">
+                <div class="lec__sidebar">
+                    <div th:replace="~{fragments/sidebar:: lecturerSidebar('feedback')}"></div>
+                </div>
+                <div class="main" id="main">
+                    <div class="row align-items-stretch no-gutters contact-wrap">
+                        <div class="col-md-8">
+                            <div class="form h-100">
+                                <h3>Send feedback</h3>
+                                <form class="mb-5" th:action="@{/student/feedbacks/add}" method="post"  th:object="${feedback}" >
+                                    <div class="row">
+                                        <div class="col-md-4 form-group mb-5">
+                                            <label for="name" class="col-form-label">Name</label>
+                                            <input type="text" th:value="${loggedInUser.name}" class="form-control"
+                                                   name="name" id="name" placeholder="Your name" readonly>
+                                        </div>
+                                        <!-- Email Field -->
+                                        <div class="col-md-4 form-group mb-5">
+                                            <label for="email" class="col-form-label">Email *</label>
+                                            <input type="text" th:value="${loggedInUser.email}" class="form-control"
+                                                   name="email" id="email" placeholder="Your email" readonly>
+                                        </div>
+                                        <div class="col-md-4 form-group mb-5">
+                                            <label for="role" class="col-form-label">Role</label>
+                                            <input type="text" th:value="${loggedInUser.role}" class="form-control"
+                                                   name="role" id="role" placeholder="Role #" readonly>
+                                        </div>
+                                    </div>
+
+                                    <!-- Role and Campus Fields -->
+
+
+                                    <div class="row">
+                                        <div class="col-md-12 form-group mb-5">
+                                            <label class="col-form-label">How was your experience with the E-resource site? </label>
+                                            <div class="emoji">
+                                                <div class="container">
+                                                    <div class="item">
+                                                        <label for="0">
+                                                            <input th:field="*{feedbackEmotion}" class="radio" type="radio" name="feedback" id="0" value="Bad">
+                                                            <span>🤬</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="item">
+                                                        <label for="1">
+                                                            <input th:field="*{feedbackEmotion}" class="radio"  type="radio" name="feedback" id="1" value="Good">
+                                                            <span>🙁</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="item">
+                                                        <label for="2">
+                                                            <input th:field="*{feedbackEmotion}" class="radio" type="radio" name="feedback" id="2" value="Very Good">
+                                                            <span>😶</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="item">
+                                                        <label for="3">
+                                                            <input th:field="*{feedbackEmotion}" class="radio" type="radio" name="feedback" id="3" value="Satisfied">
+                                                            <span>😁</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="item">
+                                                        <label for="4">
+                                                            <input th:field="*{feedbackEmotion}" class="radio" type="radio" name="feedback" id="4" value="Very Satisfied">
+                                                            <span>😍</span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <input type="hidden" th:value="Pending" th:field="*{status}" >
+                                    <!-- Feedback Content Field -->
+                                    <div class="row">
+                                        <div class="col-md-12 form-group mb-5">
+                                            <label for="feedbackContent" class="col-form-label">Message *</label>
+                                            <textarea class="form-control" th:field="*{feedbackContent}" id="feedbackContent" cols="30" rows="4" placeholder="Write your feedback"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <input type="submit" value="Send Message" class="btn btn-primary rounded-0 py-2 px-4">
+                                            <span class="submitting"></span>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div id="form-message-warning mt-4"></div>
+                                <div id="form-message-success">
+                                    Your message was sent, thank you!
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-info h-100">
+                                <h3>Contact Information</h3>
+                                <p class="mb-5">Thư viện số Trường Đại Học FPT</p>
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="wrap-icon icon-room mr-3"></span>
+                                        <span class="text">Thạch Thất, Hòa Lạc</span>
+                                    </li>
+                                    <li class="d-flex">
+                                        <span class="wrap-icon icon-phone mr-3"></span>
+                                        <span class="text">+1 (291) 939 9321</span>
+                                    </li>
+                                    <li class="d-flex">
+                                        <span class="wrap-icon icon-envelope mr-3"></span>
+                                        <span class="text">ers@mywebsite.com</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="row" th:replace="~{fragments/footer :: footerSection}"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!--Bootstrap script-->
+<script th:src="@{/assets/bootstrap-dist/js/bootstrap.bundle.min.js}"
+
+        crossorigin="anonymous"></script>
+<!--Custom script-->
+<script th:src="@{/js/lecturer/lecturer.js}"></script>
+<script th:inline="javascript">
+    const textarea = document.getElementById('feedbackContent');
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+</script>
+</body>
+</html>
+
+

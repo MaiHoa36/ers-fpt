@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FPT University E-resources</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fontawesome-6.4.2/css/all.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles/student.css}"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+<body class="app_container">
+<!-- Header -->
+<div th:replace="~{fragments/header::studentHeaderSection}"></div>
+<div class="main_content">
+    <div class="container-content-wrapper">
+        <!--  Main-->
+        <div class="container-content">
+            <div class="main-content stu_course-saved">
+                <div class="stu_course-saved-content d-flex">
+                    <div class="stu_sidebar">
+                        <div th:replace="~{fragments/sidebar:: studentSidebar('home')}"></div>
+                    </div>
+                    <div class="stu_course-saved-content main" id="main">
+                        <form th:action="@{/student/search}" class="header__search">
+                            <!--Label-->
+                            <div class="search-label">
+                                <label th:for="search">Search resources
+                                </label>
+                            </div>
+                            <!-- Input  -->
+                            <div class="header__search-input-wrap">
+                                <input type="text" class="header__search-input"
+                                       placeholder="Enter here ..."
+                                       name="search"
+                                       th:id="search-text">
+                                <!-- Header-search-history -->
+                                <div class="header__search-history">
+                                    <h3 class="header__search-history-heading">
+                                        Search history
+                                    </h3>
+                                    <ul class="header__search-history-list">
+
+                                        <li class="header__search-history-item">
+                                            <a href="">Software</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Select-find-scope -->
+                            <div class="header__search-select">
+                                <span class="header__search-select-label">          </span>
+                                <i class="header__search-select-icon fas fa-angle-down"></i>
+                                <ul class="header__search-option">
+                                    <li class="header__search-option-item header__search-option-item--active">
+                                        <span class="">All results</span>
+                                        <i class="fas fa-check"></i>
+                                    </li>
+                                    <li class="header__search-option-item">
+                                        <span class="">library</span>
+                                        <i class="fas fa-check"></i>
+                                    </li>
+                                    <li class="header__search-option-item">
+                                        <span class="">e-resources</span>
+                                        <i class="fas fa-check"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="header__search-btn">
+                                <i class="header__search-btn-icon fas fa-search"></i>
+                            </button>
+                        </form>
+
+                        <div th:id="check-ws"></div>
+
+
+
+
+                        <div class="stu__recent-course-content">
+                            <div class="stu__div-content-recent-title">
+                                <h2 class="p border-bottom">
+                                    Recent courses
+                                </h2>
+                            </div>
+                            <div class="stu__courses-list-recent home-courses">
+                                <div class="stu__view-recent-courses">
+                                    <div class="stu__view-list-course-content">
+                                        <div class="view-inline-list">
+                                            <ul class="home__course-list  d-flex">
+                                                <li class="home__course-item grid__column-2"  th:each="course : ${recentCourses}">
+                                                    <div class="home__course-wrapper-inline">
+                                                        <h2 class="home__course-code" th:text="${course.courseCode}" href=""></h2>
+                                                        <a class="home__course-name-inline" th:text="${course.courseName}"
+                                                           th:href="@{'/student/courses/' + ${course.id}}"></a>
+                                                        <p class="home__course-description" th:text="${course.description}"></p>
+                                                        <ul class="home__course-lecturer-list">
+<!--                                                            <th:block th:if="${course.lecturer ne null}">-->
+<!--                                                                <li class="home__course-lecturer-item" >-->
+<!--                                                                    <a class="home__course-lecturer-link"-->
+<!--                                                                       href="">-->
+<!--                                                                        <span>Lecturer: </span>-->
+<!--                                                                        <span th:text="${course.lecturer.account.name}"></span>-->
+<!--                                                                    </a>-->
+<!--                                                                </li>-->
+<!--                                                            </th:block>-->
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footerSection}"></div>
+
+
+<!--jquery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!--Bootstrap script-->
+<script th:src="@{/assets/bootstrap-dist/js/bootstrap.bundle.min.js}"
+
+        crossorigin="anonymous"></script>
+<!--Custom script-->
+<script th:src="@{/js/student/student.js}"></script>
+</body>
+</html>

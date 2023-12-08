@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FPT University E-Resources</title>
+  <!-- CSS -->
+  <link rel="stylesheet" th:href="@{/assets/bootstrap-dist/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/fontawesome-6.4.2/css/all.css}"/>
+
+  <link rel="stylesheet" th:href="@{/css/styles/guest.css}">
+  <link rel="stylesheet" th:href="@{/css/base.css}"/>
+  <link rel="stylesheet" th:href="@{/css/fragment.css}"/>
+
+
+
+</head>
+<body>
+<div class="app_container">
+
+  <div th:replace="~{fragments/header::guestHeaderSection}"></div>
+  <div th:replace="~{common/login}"></div>
+  <!--  Main-->
+  <!--  slide-->
+
+  <div class="mySlides w3-display-container w3-center ">
+    <img th:src="@{/images/guest/library_design1.png}" alt="library1" style="width:100%; filter: brightness(40%);">
+    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+      <div class="text-text">FPT University <br> E-resources System</div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="content-section">
+      <h2 class="section-heading">Hệ thống tài nguyên học tập số Trường đại học FPT </h2>
+      <p class="section-sub-heading">Nơi cung cấp và tìm kiếm các tài liệu học tập số</p>
+      <p class="about-text">
+        Thư viện Đại học FPT là một phần quan trọng không thể thiếu trong cơ sở hạ tầng học thuật của trường Đại học FPT, nằm ẩn mình giữa khuôn viên đẹp và hiện đại của trường. Được xây dựng với mục tiêu tạo ra một môi trường học tập và nghiên cứu lý tưởng, thư viện Đại học FPT đã nhanh chóng trở thành một trung tâm tri thức đa dạng, nơi tập trung mọi nguồn tài liệu và dịch vụ hỗ trợ học tập cho cộng đồng sinh viên và giảng viên.
+
+        Thư viện Đại học FPT với kiến trúc hiện đại và tiện nghi không chỉ là nơi lưu trữ hàng ngàn cuốn sách, tạp chí, báo cáo nghiên cứu, mà còn là một không gian thú vị và sáng tạo. Sinh viên tại đây có cơ hội tiếp cận vào thế giới tri thức thông qua các máy tính, phòng đọc, khu vực tự học, phòng thảo luận, và khu vườn đọc ngoài trời. Thư viện còn cung cấp dịch vụ thư mục, in ấn, và hỗ trợ nghiên cứu cho tất cả những ai cần.
+
+      </p>
+
+      <div class="member-list">
+        <div class="member-item">
+          <p class="member-name">Nhanh chóng</p>
+          <img class="member-img" th:src="@{/images/guest/library1.jpg}" alt="library1" style="width:100%">
+        </div>
+        <div class="member-item">
+          <p class="member-name">Tiện lợi</p>
+          <img class="member-img" th:src="@{/images/guest/library2.jpg}" alt="library2" style="width:100%">
+
+          <!--                    <img src="./images/bandmember.jpg" alt="Name" class="member-img">-->
+        </div>
+        <div class="member-item">
+          <p class="member-name">Dễ dàng</p>
+          <img class="member-img" th:src="@{/images/guest/library3.jpg}" alt="library3" style="width:100%">
+
+          <!--                    <img src="./images/bandmember.jpg" alt="Name" class="member-img">-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <div th:replace="~{fragments/footer :: footerSection}"></div>
+</div>
+<script th:src="@{/js/guest.js}"></script>
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+  }
+</script>
+
+</body>
+</html>
+
